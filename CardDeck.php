@@ -4,10 +4,12 @@ include "Card.php";
 
 class CardDeck{
 	private $deck;
+	private $index;
 
 	function __construct(){
 		$this->deck = array();
 		$this->populateDeck();
+		$this->index = -1;
 	}
 
 	function populateDeck(){
@@ -18,13 +20,22 @@ class CardDeck{
 			}
 		}
 	}
-
+/*
 	function getCard($index){
 		if(!is_integer($index) || $index < 0 || $index > 51){
 			return new Card(0, "J"); //joker
 		}
 
 		return $this->deck[$index];
+	}
+*/
+
+	function getNextCard(){
+		$this->index = $this->index + 1;
+		if($this->index > 51){
+			return new Card(0,"J");
+		}
+		return $this->deck[$this->index];
 	}
 
 	function shuffleDeck(){
