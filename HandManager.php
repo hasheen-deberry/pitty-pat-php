@@ -1,4 +1,5 @@
 <?php
+
 abstract class HandManager{
 
 	function __construct(){
@@ -14,14 +15,14 @@ abstract class HandManager{
 				$aRank = $a->getRank();
 				$bRank = $b->getRank();
 				if($aRank == $bRank){
-					return 0;
+					return 0;			
 				}
 
 				return $aRank < $bRank ? -1 : 1;
 			});
 
 			$counter = 0;
-			while(($counter + 1) <= count($hand)){
+			while(($counter + 1) < count($hand)){
 				$cardA = $hand[$counter];
 				$cardB = $hand[($counter+1)];
 
@@ -30,7 +31,9 @@ abstract class HandManager{
 					$pairs[] = $hand[($counter+1)];
 					$counter+=2;
 				}
-				$counter+=1;
+				else{
+					$counter+=1;
+				}				
 			}
 		}
 
@@ -45,7 +48,7 @@ abstract class HandManager{
 		$pairs = $this->getPairs($hand);
 		if(count($pairs) > 0){
 
-			$hand = array_diff($hand, $pairs, function($itemFromA, $itemFromB){
+			$hand = array_udiff($hand, $pairs, function($itemFromA, $itemFromB){
 				$aRank = $itemFromA->getRank();
 				$bRank = $itemFromB->getRank();
 				$aSuit = $itemFromA->getSuit();
@@ -62,17 +65,16 @@ abstract class HandManager{
 		}
 
 		return false;
-
 	}
 
 	function printHand($cardArray, $hideCards){
 		$hand = "";
 		foreach($cardArray as $card){
 			if($hideCards){
-				$hand.="XX ";
+				$hand.="XX ";				
 			}
 			else{
-				$hand.= $card->printCard()." ";
+				$hand.= $card->printCard()." ";				
 			}
 		}
 

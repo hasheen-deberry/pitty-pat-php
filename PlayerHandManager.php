@@ -1,8 +1,9 @@
 <?php
+require 'HandManager.php';
 class PlayerHandManager extends HandManager{
 
 	function promptSelect(&$hand){
-		$instructions = "";
+		$instructions = '';
 		$canDrawFromDiscardPile = false;
 		$canDrawFromFreshCardPile = false;
 
@@ -16,8 +17,8 @@ class PlayerHandManager extends HandManager{
 
 		if($canDrawFromDiscardPile and $canDrawFromFreshCardPile){
 
-			$instructions.="Press 1 to draw from discard pile".PHP_EOL;
-			$instructions.="Press 2 to draw from fresh card pile: ";
+			$instructions.='Press 1 to draw from discard pile'.PHP_EOL;
+			$instructions.='Press 2 to draw from fresh card pile: ';
 
 			$userInputValid  = false;
 
@@ -66,5 +67,4 @@ class PlayerHandManager extends HandManager{
 			}
 		}while(!$userInputValid);
 	}
-
 }
